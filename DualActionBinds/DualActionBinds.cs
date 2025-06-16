@@ -38,12 +38,17 @@ namespace OpenTabletDriver.Desktop.Binding
             if (keys_press.Count > 0)
             {
                 Keyboard.Press(keys_press);
-                Keyboard.Release(keys_press);
             }
         }
 
         public void Release(TabletReference tablet, IDeviceReport report)
         {
+
+            if (keys_press.Count > 0)
+            {
+                Keyboard.Release(keys_press);
+            }
+
             if (keys_release.Count > 0)
             {
                 Keyboard.Press(keys_release);
