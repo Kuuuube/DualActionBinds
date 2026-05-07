@@ -33,18 +33,26 @@ namespace OpenTabletDriver.Desktop.Binding
             get => keysString;
         }
 
+        [BooleanProperty("Disable key holding", "")]
+        public bool DisableKeyHolding { set; get;}
+
         public void Press(TabletReference tablet, IDeviceReport report)
         {
             if (keys_press.Count > 0)
             {
                 Keyboard.Press(keys_press);
+
+                if (DisableKeyHolding)
+                {
+                    Keyboard.Release(keys_press);
+                }
             }
         }
 
         public void Release(TabletReference tablet, IDeviceReport report)
         {
 
-            if (keys_press.Count > 0)
+            if (keys_press.Count > 0 && !DisableKeyHolding)
             {
                 Keyboard.Release(keys_press);
             }
